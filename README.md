@@ -19,9 +19,10 @@ The project flow is:
 raw complaint narratives
 -> EDA and data quality checks
 -> remove missing and duplicate text
--> TF-IDF text features
--> baseline classifier
--> evaluation and error review
+-> compare Bag of Words and TF-IDF baselines
+-> tune the top 3 validation models
+-> evaluate the selected model
+-> confusion matrix and error review
 ```
 
 ## Project Status
@@ -39,7 +40,7 @@ Completed:
 
 Next planned step:
 
-- Improve the baseline model with tuning and error analysis.
+- Add deeper error analysis for the most confused product categories.
 
 ## Repository Structure
 
@@ -113,20 +114,22 @@ The baseline modeling notebook includes:
 - Cleaning missing or empty complaint narratives
 - Removing exact duplicate narratives before splitting
 - Stratified train/test split
-- TF-IDF vectorization with unigrams and bigrams
-- Class-weighted Linear SVM baseline
+- Bag of Words and TF-IDF text features
+- Comparison of Dummy, Naive Bayes, SGD, Logistic Regression, and Linear SVM models
+- Top 3 model selection before tuning
+- Model selection using validation macro F1
 - Macro F1, weighted F1, and per-class recall
 - Confusion matrix and error analysis
 
-Baseline result:
+Selected model:
 
-- Accuracy: 0.86
-- Macro F1: 0.84
+- Model: `TFIDF_LinearSVC_ngram(1, 3)_min3_C0.5`
+- Macro F1: 0.85
 - Weighted F1: 0.86
+- Error rate: 13.66%
 
 How to interpret this:
 
-- Accuracy shows the overall percentage of correct predictions.
 - Macro F1 gives each class equal weight, so it is important for this imbalanced dataset.
 - Weighted F1 accounts for class size and is useful for overall model performance.
 - The gap between macro F1 and weighted F1 shows that minority classes still need attention.
