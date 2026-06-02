@@ -44,6 +44,34 @@ raw complaint narratives
 -> confusion matrix and error review
 ```
 
+## How to Run
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Train the selected classifier and save the model artifact:
+
+```bash
+python -m src.train
+```
+
+Run a prediction from the command line:
+
+```bash
+python -m src.predict "There is an incorrect late payment on my credit report."
+```
+
+Example output:
+
+```text
+Predicted product: credit_reporting
+Suggested team: Credit Reporting Disputes Team
+Priority: Compliance review
+```
+
 ## Future GenAI Work
 
 This repository is currently an NLP classifier, not a GenAI assistant. A future
@@ -87,6 +115,14 @@ financial-complaint-nlp-classifier/
 |   +-- Modeling.ipynb
 +-- models/
 |   +-- README.md
++-- reports/
+|   +-- README.md
+|   +-- figures/
+|       +-- confusion_matrix.png
++-- src/
+|   +-- __init__.py
+|   +-- predict.py
+|   +-- train.py
 +-- README.md
 +-- requirements.txt
 +-- LICENSE
@@ -165,6 +201,13 @@ The modeling notebook includes:
 - Example predictions on new complaint text
 - Confusion matrix and error analysis
 
+## Confusion Matrix
+
+The selected model still shows meaningful overlap between some product
+categories, especially `credit_reporting` and `debt_collection`.
+
+![Confusion matrix](reports/figures/confusion_matrix.png)
+
 Selected model:
 
 - Model: `TFIDF_LinearSVC_ngram(1, 3)_min3_C0.5`
@@ -193,7 +236,7 @@ appear in both training and test data.
 
 ## Model Artifact
 
-The modeling notebook saves the selected classifier locally:
+The modeling notebook and `src.train` save the selected classifier locally:
 
 ```text
 models/complaint_classifier.joblib
@@ -201,6 +244,18 @@ models/complaint_classifier.joblib
 
 The artifact is ignored by Git because it can be regenerated from the notebook
 and may become large.
+
+## Limitations
+
+- The model is trained on processed complaint narratives, not raw complaint
+  intake text.
+- The project does not connect to live CFPB or banking systems.
+- The classifier supports triage, but it should not be used as a final
+  compliance or legal decision-maker.
+- Some categories share vocabulary, especially `credit_reporting` and
+  `debt_collection`, which creates unavoidable classification ambiguity.
+- The GenAI assistant layer is future work and is not part of the current
+  implementation.
 
 ## Requirements
 
