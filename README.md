@@ -1,8 +1,8 @@
-# Financial Complaint NLP Assistant
+# Financial Complaint NLP Classifier
 
 This project uses consumer financial complaint narratives to build an NLP classifier that predicts the financial product category of each complaint and supports complaint triage.
 
-The current version is a classical NLP classification project. It is not yet a full GenAI assistant, but it creates the classification and routing layer that a future assistant could use.
+The current version is a classical NLP classification project. A GenAI assistant layer is future work, not part of the current implementation. The classifier creates the routing layer that a future assistant could use.
 
 The workflow starts with exploratory data analysis of the processed complaint dataset, then compares Bag of Words and TF-IDF baselines before selecting a tuned Linear SVM model.
 
@@ -39,6 +39,18 @@ raw complaint narratives
 -> confusion matrix and error review
 ```
 
+## Future GenAI Work
+
+The current project is intentionally focused on the classification layer. A future GenAI extension could use the predicted product category to:
+
+- Route the complaint to a product-specific knowledge base
+- Retrieve relevant policy or compliance context
+- Draft a first-pass complaint summary
+- Suggest the correct operations or compliance team
+- Support human review rather than replacing it
+
+This future layer would be built on top of the classifier, not instead of it.
+
 ## Project Status
 
 Completed:
@@ -62,7 +74,7 @@ Next planned step:
 ## Repository Structure
 
 ```text
-financial-complaint-nlp-genai-assistant/
+financial-complaint-nlp-classifier/
 +-- notebooks/
 |   +-- EDA.ipynb
 |   +-- Modeling.ipynb
@@ -86,7 +98,7 @@ Download the dataset from Kaggle and place the file in the project root:
 Expected local layout:
 
 ```text
-financial-complaint-nlp-genai-assistant/
+financial-complaint-nlp-classifier/
 +-- complaints_processed.csv
 +-- notebooks/
     +-- EDA.ipynb
