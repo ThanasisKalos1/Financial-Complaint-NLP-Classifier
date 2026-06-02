@@ -2,9 +2,7 @@
 
 This project uses consumer financial complaint narratives to build an NLP classifier that predicts the financial product category of each complaint and supports complaint triage.
 
-The current version is a classical NLP classification project. A GenAI assistant layer is future work, not part of the current implementation. The classifier creates the routing layer that a future assistant could use.
-
-The workflow starts with exploratory data analysis of the processed complaint dataset, then compares Bag of Words and TF-IDF baselines before selecting a tuned Linear SVM model.
+The current version is a classical NLP classification project. The workflow starts with exploratory data analysis of the processed complaint dataset, then compares Bag of Words and TF-IDF baselines before selecting a tuned Linear SVM model.
 
 ## Business Value
 
@@ -23,7 +21,7 @@ Start with the notebooks in this order:
 1. [EDA notebook](notebooks/EDA.ipynb)
    - Understand the dataset, class imbalance, duplicate records, text length, and important terms.
 2. [Modeling notebook](notebooks/Modeling.ipynb)
-   - Train a baseline classifier using the choices motivated by the EDA.
+   - Compare baseline classifiers, tune the top 3 validation models, and evaluate the selected classifier.
 
 The project flow is:
 
@@ -41,7 +39,7 @@ raw complaint narratives
 
 ## Future GenAI Work
 
-The current project is intentionally focused on the classification layer. A future GenAI extension could use the predicted product category to:
+This repository is currently an NLP classifier, not a GenAI assistant. A future GenAI extension could use the predicted product category to:
 
 - Route the complaint to a product-specific knowledge base
 - Retrieve relevant policy or compliance context
@@ -49,7 +47,7 @@ The current project is intentionally focused on the classification layer. A futu
 - Suggest the correct operations or compliance team
 - Support human review rather than replacing it
 
-This future layer would be built on top of the classifier, not instead of it.
+This future layer would be built on top of the classifier, not instead of it. It is listed as future work only.
 
 ## Project Status
 
