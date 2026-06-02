@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data files — store locally, not in git
+data/
+*.csv
+*.parquet
+*.json.gz
+*.zip
