@@ -225,10 +225,10 @@ How to interpret this:
   dataset.
 - Weighted F1 accounts for class size and is useful for overall model
   performance.
-- The gap between macro F1 and weighted F1 shows that minority classes still
-  need attention.
-- The confusion matrix should be used to find which product categories overlap
-  the most.
+- The small gap between macro F1 and weighted F1 suggests that performance is
+  fairly balanced across classes despite the class imbalance.
+- The confusion matrix is still needed to find specific category overlaps,
+  especially between `credit_reporting` and `debt_collection`.
 
 After removing exact duplicate narratives, the baseline is a more honest
 estimate of model performance because the same complaint text is less likely to
