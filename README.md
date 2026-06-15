@@ -31,6 +31,8 @@ A small web interface lets anyone try the classifier without running any code:
 
 **→ https://complaint-triage.vercel.app**
 
+[![Complaint Triage Assistant — live demo](docs/demo.png)](https://complaint-triage.vercel.app)
+
 - **Single complaint:** type or paste a narrative and get the predicted product
   category, a suggested team, a priority, and a short triage note.
 - **Batch:** upload a CSV of complaints, see a summary by category, and download
@@ -54,6 +56,17 @@ Python serverless function (api/predict.py)
 - Hosted on Vercel with GitHub push-to-deploy: pushing to `main` redeploys the
   app automatically. The front-end lives in [`web/`](web/) (see
   [`web/README.md`](web/README.md) for architecture and local development).
+
+Demo limitations to be aware of:
+
+- The serverless function may have a short **cold-start delay** on the first
+  request after it has been idle (the model is loaded on demand).
+- Batch upload is capped at **2,000 complaints per request** to stay within the
+  function's time and memory budget.
+- It runs on Vercel's **free tier**, so it is intended for demonstration and
+  evaluation, not production traffic.
+- Predictions reflect the model's own limits (see [Limitations](#limitations)),
+  e.g. overlap between `credit_reporting` and `debt_collection`.
 
 ## How to Read This Project
 
