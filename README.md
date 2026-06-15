@@ -9,6 +9,10 @@ starts with exploratory data analysis of the processed complaint dataset, then
 compares Bag of Words and TF-IDF baselines before selecting a tuned Linear SVM
 model.
 
+> **Live demo:** https://complaint-triage.vercel.app — paste a complaint (or
+> upload a CSV) and see the predicted product category and suggested triage
+> routing. See [Live Demo (Web App)](#live-demo-web-app) for how it works.
+
 ## Business Value
 
 Financial institutions receive large volumes of customer complaints across
@@ -20,6 +24,36 @@ collection. A classifier like this can help:
 - Identify recurring product or servicing issues
 - Support compliance monitoring and complaint trend analysis
 - Prioritize error review for complaint categories that are often confused
+
+## Live Demo (Web App)
+
+A small web interface lets anyone try the classifier without running any code:
+
+**→ https://complaint-triage.vercel.app**
+
+- **Single complaint:** type or paste a narrative and get the predicted product
+  category, a suggested team, a priority, and a short triage note.
+- **Batch:** upload a CSV of complaints, see a summary by category, and download
+  the triaged results.
+
+How it works:
+
+```text
+browser (Next.js UI)
+  -> parses the CSV in-browser, POSTs { "texts": [...] } to /api/predict
+Python serverless function (api/predict.py)
+  -> loads the saved scikit-learn model (complaint_classifier.joblib)
+  -> returns predicted_product + suggested_team + priority + triage_note
+```
+
+- Single complaint and batch upload share the same endpoint (single = a
+  one-element array).
+- The model artifact is bundled into the serverless function, so inference runs
+  on the same TF-IDF + Linear SVM classifier described below — no separate
+  service or database.
+- Hosted on Vercel with GitHub push-to-deploy: pushing to `main` redeploys the
+  app automatically. The front-end lives in [`web/`](web/) (see
+  [`web/README.md`](web/README.md) for architecture and local development).
 
 ## How to Read This Project
 
@@ -126,6 +160,10 @@ financial-complaint-nlp-classifier/
 |   +-- __init__.py
 |   +-- predict.py
 |   +-- train.py
++-- web/                     # deployed front-end (Next.js UI + Python API)
+|   +-- app/                 # UI (single complaint + batch CSV)
+|   +-- api/predict.py       # serverless inference function
+|   +-- README.md
 +-- README.md
 +-- requirements.txt
 +-- LICENSE
