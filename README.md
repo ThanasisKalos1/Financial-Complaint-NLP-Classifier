@@ -46,6 +46,9 @@ raw complaint narratives
 
 ## How to Run
 
+Before running the notebooks or scripts, download `complaints_processed.csv`
+as described in [Data Setup](#data-setup).
+
 Install dependencies:
 
 ```bash
@@ -102,7 +105,7 @@ Completed:
 - Final selected complaint classification model
 - Saved model generation and prediction examples
 
-Next planned step:
+Possible future improvement:
 
 - Add deeper error analysis for the most confused product-category pairs.
 
@@ -148,14 +151,14 @@ financial-complaint-nlp-classifier/
     +-- EDA.ipynb
 ```
 
-The EDA notebook reads the data with:
+The notebooks read the data with:
 
 ```python
 data_path = '../complaints_processed.csv'
 ```
 
-So run `notebooks/EDA.ipynb` from inside the `notebooks/` folder or open it
-normally in Jupyter from the project directory.
+So run the notebooks from inside the `notebooks/` folder or open them normally
+in Jupyter from the project directory.
 
 Data files are listed in `.gitignore` and should not be committed.
 
