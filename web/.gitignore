@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+
+# vercel
+.vercel/
+
+# typescript
+next-env.d.ts
+*.tsbuildinfo
+
+# python cache (for local api testing)
+__pycache__/
+
+# NOTE: complaint_classifier.joblib is intentionally NOT ignored here.
+# It must be present so Vercel can bundle it into the Python function.
+
+.vercel

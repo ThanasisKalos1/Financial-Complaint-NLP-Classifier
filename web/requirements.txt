@@ -1,0 +1,6 @@
+# Pinned to the versions that trained/saved complaint_classifier.joblib.
+# A mismatch here is the most common cause of "model fails to unpickle" on Vercel.
+scikit-learn==1.8.0
+scipy==1.17.1
+numpy==2.4.3
+joblib==1.5.3
